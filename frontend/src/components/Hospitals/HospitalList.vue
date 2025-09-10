@@ -23,7 +23,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import api from '../../api'
+import API from '../../services/api'
 import { useRouter } from 'vue-router'
 
 const hospitals = ref([])
@@ -32,7 +32,7 @@ const router = useRouter()
 
 async function fetch(){
   try{
-    const r = await api.get('/hospitals')
+    const r = await API.get('/hospitals')
     hospitals.value = r.data
   }catch(e){
     console.error(e)

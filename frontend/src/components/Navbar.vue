@@ -7,15 +7,22 @@
       </div>
       <ul class="hidden md:flex space-x-6 text-gray-600 font-medium">
         <li><router-link to="/" class="hover:text-blue-600">Home</router-link></li>
-        <li><router-link to="/hospitals" class="hover:text-blue-600">Hospitals</router-link></li>
-        <li><router-link to="/dashboard" class="hover:text-blue-600">Dashboard</router-link></li>
-        <li><router-link to="/login" class="hover:text-blue-600">Login</router-link></li>
-        <li><router-link to="/register" class="hover:text-blue-600">Register</router-link></li>
+        <li><router-link to="/dashboard" class="hover:text-blue-600">My Dashboard</router-link></li>
+        <li><router-link to="/doctor-dashboard" class="hover:text-blue-600">Doctor Dashboard</router-link></li>
+        <li><router-link to="/add-hospital" class="hover:text-blue-600">Add Hospital</router-link></li>
+        <li><router-link to="/add-doctor" class="hover:text-blue-600">Add Doctor</router-link></li>
+        <li v-if="!user"><router-link to="/login" class="hover:text-blue-600">Login</router-link></li>
+        <li v-if="!user"><router-link to="/register" class="hover:text-blue-600">Register</router-link></li>
+        <li v-if="user" @click="logout" class="hover:text-blue-600 cursor-pointer">Logout</li>
       </ul>
     </div>
   </nav>
 </template>
 
-<script setup></script>
+<script setup>
+import { useAuth } from '../stores/auth'
+
+const { user, logout } = useAuth()
+</script>
 
 <style scoped></style>

@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import api from '../../api'
+import API from '../../services/api'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -27,7 +27,7 @@ const doctors = ref([])
 
 async function fetchDoctors(){
   try{
-    const r = await api.get(`/doctors/${route.params.id}`)
+    const r = await API.get(`/doctors/${route.params.id}`)
     doctors.value = r.data
   }catch(e){
     console.error(e)
@@ -38,7 +38,7 @@ onMounted(fetchDoctors)
 
 async function book(doctorId){
   try{
-    const r = await api.post('/tickets', { doctor_id: doctorId })
+    const r = await API.post('/tickets', { doctor_id: doctorId })
     alert(`Booked token ${r.data.ticket_id}. Est wait ~${r.data.estimated_wait_minutes ?? 'N/A'} min`)
   }catch(e){
     alert('Booking failed. Are you logged in?')

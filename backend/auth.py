@@ -18,7 +18,8 @@ def register():
     )
     db.session.add(user)
     db.session.commit()
-    return jsonify({"message": "User registered successfully"}), 201
+    token = create_access_token(identity={"id": user.id, "role": user.role})
+    return jsonify({"token": token, "user": {"id": user.id, "name": user.name, "email": user.email, "role": user.role}}), 201
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
@@ -26,5 +27,5 @@ def login():
     user = User.query.filter_by(email=data["email"]).first()
     if user and verify_password(data["password"], user.password):
         token = create_access_token(identity={"id": user.id, "role": user.role})
-        return jsonify({"access_token": token, "role": user.role})
+        return jsonify({"token": token, "user": {"id": user.id, "name": user.name, "email": user.email, "role": user.role}})
     return jsonify({"error": "Invalid credentials"}), 401

@@ -31,7 +31,7 @@ const router = useRouter()
 
 async function onSubmit(){
   try{
-    await register({ full_name: full_name.value, email: email.value, password: password.value, role: role.value })
+    await register({ name: full_name.value, email: email.value, password: password.value, role: role.value })
     router.push('/')
   }catch(e){
     alert('Registration failed')

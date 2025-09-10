@@ -18,13 +18,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import api from '../../api'
+import API from '../../services/api'
 
 const tickets = ref([])
 
 async function fetch(){
   try{
-    const r = await api.get('/tickets/mine')
+    const r = await API.get('/tickets/mine')
     tickets.value = r.data
   }catch(e){
     console.error(e)
