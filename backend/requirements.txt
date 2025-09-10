@@ -6,3 +6,4 @@ sqlalchemy
 python-dotenv
 supabase
 werkzeug
+flask_sqlalchemy
