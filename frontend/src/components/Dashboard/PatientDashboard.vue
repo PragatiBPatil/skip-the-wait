@@ -9,7 +9,7 @@
           <div class="text-sm text-gray-600">Est wait: {{ t.estimated_wait_minutes ?? 'N/A' }} min</div>
         </div>
         <div>
-          <router-link :to="`/queue/${t.id}`" class="px-3 py-1 bg-gray-200 rounded">View</router-link>
+          <router-link :to="`/queue/${t.doctor_id}`" class="px-3 py-1 bg-gray-200 rounded">View</router-link>
         </div>
       </li>
     </ul>

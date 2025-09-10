@@ -6,7 +6,7 @@
       <li v-for="d in doctors" :key="d.id" class="bg-white p-4 rounded shadow flex justify-between items-center">
         <div>
           <div class="font-medium">{{ d.name }}</div>
-          <div class="text-sm text-gray-600">{{ d.specialization }} • {{ d.consultation_time_minutes }} min</div>
+          <div class="text-sm text-gray-600">{{ d.specialization }} • {{ d.timings }}</div>
         </div>
         <div class="flex gap-2">
           <button @click="book(d.id)" class="px-3 py-1 bg-green-600 text-white rounded">Book Token</button>
@@ -27,7 +27,7 @@ const doctors = ref([])
 
 async function fetchDoctors(){
   try{
-    const r = await api.get(`/hospitals/${route.params.id}/doctors`)
+    const r = await api.get(`/doctors/${route.params.id}`)
     doctors.value = r.data
   }catch(e){
     console.error(e)
@@ -38,8 +38,8 @@ onMounted(fetchDoctors)
 
 async function book(doctorId){
   try{
-    const r = await api.post('/book', { doctor_id: doctorId, hospital_id: route.params.id })
-    alert(`Booked token ${r.data.ticket.token_number}. Est wait ~${r.data.ticket.estimated_wait_minutes ?? 'N/A'} min`)
+    const r = await api.post('/tickets', { doctor_id: doctorId })
+    alert(`Booked token ${r.data.ticket_id}. Est wait ~${r.data.estimated_wait_minutes ?? 'N/A'} min`)
   }catch(e){
     alert('Booking failed. Are you logged in?')
   }

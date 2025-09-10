@@ -9,8 +9,8 @@ if (token.value) setToken(token.value)
 export function useAuth(){
   const login = async (email,password)=>{
     const res = await api.post('/auth/login',{ email, password })
-    token.value = res.data.token
-    user.value = res.data.user
+    token.value = res.data.access_token
+    user.value = { role: res.data.role } // backend returns role separately, no user object
     localStorage.setItem('token', token.value)
     localStorage.setItem('user', JSON.stringify(user.value))
     setToken(token.value)
@@ -18,11 +18,8 @@ export function useAuth(){
   }
   const register = async (payload)=>{
     const res = await api.post('/auth/register', payload)
-    token.value = res.data.token
-    user.value = res.data.user
-    localStorage.setItem('token', token.value)
-    localStorage.setItem('user', JSON.stringify(user.value))
-    setToken(token.value)
+    // backend register returns message only, no token or user
+    // so no token or user to set here
     return res
   }
   const logout = ()=>{

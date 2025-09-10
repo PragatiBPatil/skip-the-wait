@@ -46,7 +46,8 @@ def get_my_tickets():
             "id": t.id,
             "token_number": t.id,
             "status": t.status,
-            "estimated_wait_minutes": estimated_wait
+            "estimated_wait_minutes": estimated_wait,
+            "doctor_id": t.doctor_id
         })
 
     return jsonify(result)
