@@ -9,7 +9,7 @@
         <select v-model="role" class="w-full p-2 border rounded">
           <option value="patient">Patient</option>
           <option value="doctor">Doctor</option>
-          <option value="staff">Staff</option>
+          <option value="admin">Admin</option>
         </select>
       </div>
       <button class="px-4 py-2 bg-green-600 text-white rounded">Create account</button>

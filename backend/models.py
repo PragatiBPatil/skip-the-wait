@@ -25,6 +25,7 @@ class Doctor(db.Model):
     specialization = db.Column(db.String(100))
     hospital_id = db.Column(db.Integer, db.ForeignKey("hospitals.id"))
     timings = db.Column(db.String(100))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=True)
 
 class Ticket(db.Model):
     __tablename__ = "tickets"
